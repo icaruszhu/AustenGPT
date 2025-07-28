@@ -1,10 +1,9 @@
 
 # AustenGPT
 
-![AustenGPT](assets/nanogpt.jpg)
 
-This project repurpose the versatile NanoGPT
-[minGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. 
+This project repurpose the small but versatile
+[NanoGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. 
 
 
 ![austen-word-cloud](assets/austen-cloud-250-word.png)
