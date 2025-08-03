@@ -53,11 +53,32 @@ We can also give a prompt word (e.g. “handsome”) like this:
 python sample.py --out_dir=out-austen-char --start="handsome"
 ```
 
-Generated text would look like this:
+Generated text would look like this (Depending how many iterations that the training has gone through, the quality of text can vary):
 
 ```
 
 ```
+
+# Repurposing and resusing AustenGPT
+AustenGPT can be repurposed thanks to NanoGPT’s versatile architecture! It can be modified to train other corpuses even including non-English texts. For example, this repo includes a corpus of Li Qingzhao (李清照 or 李易安)’s 49 poems for experimentation. [Li (1084 - 1155)](https://en.wikipedia.org/wiki/Li_Qingzhao) is one of the greatest Chinese female poets active in the Song Dynasty. The prepared corpus is in ~data/yian-char~ and its config file is ~config/train-yian-char~. Simply apply the three steps with slightly modified code.
+
+```{python}
+python data/yian_char/prepare-yian.py
+```
+This will tokenise the ~yian-char~ corpus which contains 960 characters. It is split into two sets, with the training set containing  4,566 tokens and the valuation set 508 tokens.
+
+Then train the ~yihan-char~ corpus:
+
+```{python}
+python train.py config/train_yian_char.py --device=cpu --compile=False --eval_iters=20 --log_interval=1 --block_size=64 --batch_size=12 --n_layer=4 --n_head=4 --n_embd=128 --max_iters=5000 --lr_decay_iters=500 --dropout=0.0
+
+```
+Finally sample it to generate some text similar to Li Qingzhao’s poetry.
+
+```{python}
+python sample.py --out_dir=out-yian-char --device=cpu
+```
+
 
 
 
