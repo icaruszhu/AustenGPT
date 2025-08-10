@@ -85,10 +85,17 @@ python sample.py --out_dir=out-austen-char  --device=cpu  --start="It is a truth
 
 ```
 
-Generated text would look like this (Depending how many iterations that the training has gone through, the quality of text can vary):
+Generated text would look like this. (Depending how many iterations that the training has gone through, the quality of text can vary):
+
+```
+conversations she had no state of material. Where would raise and looks actually acquite. They were not the steps far brought, inever, however, by lessleness again, and I learnt was appeared to think she had kind as him, she had a last the happier of course which he had not hope to the young word.
 
 ```
 
+The above output is not very impressive with quite a few “made-up” words.  We also tried with a computer with GPU and we ended up with some improved outputs such as this (with Wickham being mentioned!):  
+
+```
+ot immediately pronounced the beauty of the housekeeper. Her profession and fortune were not exactly half a minute made at the Parsonage all bustle in her important feelings. He was gone to London, and had made her acquaintance with the gentleman she would have been able to stay at home, he would not tell her that Wickham was sitting away.
 ```
 
 # Repurposing and resusing AustenGPT
@@ -108,5 +115,5 @@ python train.py config/train_yian_char.py --device=cpu --compile=False --eval_it
 Finally sample it to generate some text similar to Li Qingzhao’s poetry.
 
 ```{python}
-python sample.py --out_dir=out-yian-char --device=cpu
+python sample.py --out_dir=out-yian-char --device=cpu --num_samples=3 --start="渔家傲" 
 ```
