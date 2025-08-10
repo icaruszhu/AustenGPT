@@ -9,7 +9,7 @@ This project repurposes the small but versatile
 
 The repo hosts the code showing steps for building the two Austen corpuses, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
 
-- `/data/austen_qta/austen_ qta.csv`
+- `/data/austen_qta/austen_qta.csv`
 - `/data/austen-char/austen-sans-quotes.txt`
 
 We have tried our best to show how we achieve our results to allow fellow researcher to experiment with the corpuses, replicate and critique research findings. More details will be available from the above paper.
@@ -23,34 +23,66 @@ We have tried our best to show how we achieve our results to allow fellow resear
 # AI Training (with `austen-sans-quotes.txt`)
 - The AI training takes three steps with three commands
 
-## 1) Prepare 
+## 1) Corpus Data Pre-Processing: Prepare 
 - The first step tokenises the Austen corpus and it splits the corpus into 90% for traning and 10% for validation to avoid overfitting. We can the below command with the customised `prepare-austen-char.py`. Simply run this:
 
 ```sh
 python data/austen_char/prepare-austen-char.py        
 
 ```
-The result would show there are 81 unique characters as the vocabulary size. The train dataset has 3,636,652 tokens, while the validation set has 404,073 tokens.
+
+The result would show there are 81 unique characters as the vocabulary size. The whole corpus contains 4,040,725 characters.
+The train dataset has 3,636,652 tokens, while the validation set has 404,073 tokens. The unique characters are:
+
+`!"&'()*,-.0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz£`
 
 
-## 2) Train
+## 2) Train 
 
-We need to make a customised configure file  [train_austen_char.py](config/train_austen_char.py) for training the `austen_char` corpus. Then run this command:
-
+We need to make a customised configure file   [train_austen_char.py](config/train_austen_char.py) for training the `austen_char` corpus. Then run this command from the terminal.
 ```sh
 python train.py config/train_austen_char.py
 ```
 
+More specifically, the command can be modified by adding specified arguments. For example, `--device=cpu` will allow a computer to train the model with a CPU if no GPU is  available. The below tries to do the training with 10k iterations and it may take a couple of hours depending on the computer one uses: 
+
+```{python}
+python train.py config/train_austen.py --device=cpu --compile=False --eval_iters=20 --log_interval=1 --block_size=64 --batch_size=12 --n_layer=4 --n_head=4 --n_embd=128 --max_iters=10000 --lr_decay_iters=10000 --dropout=0.0 --dataset=austen_char 
+```
+During the training process, the gradually decreased loss value will may look like this: 
+
+```
+[…]
+
+iter 0: loss 4.4608, time 736139.70ms, mfu -100.00%
+iter 10: loss 3.1187, time 7539.21ms, mfu 0.05%
+iter 20: loss 2.7377, time 7419.67ms, mfu 0.05%
+iter 30: loss 2.5912, time 7492.71ms, mfu 0.05%
+iter 40: loss 2.5295, time 7658.55ms, mfu 0.05%
+iter 50: loss 2.4905, time 7643.98ms, mfu 0.05%
+iter 60: loss 2.4676, time 7368.56ms, mfu 0.05%
+iter 70: loss 2.4798, time 7974.58ms, mfu 0.05%
+iter 80: loss 2.4647, time 7414.53ms, mfu 0.05%
+iter 90: loss 2.4653, time 7485.69ms, mfu 0.05%
+iter 100: loss 2.4607, time 7995.89ms, mfu 0.05%
+
+[…]
+```
+
 
 ## 3) Sample: generate some text
-Finally, generate some text by using the `sample.py` command. Note that we need to specify the output directory `out_dir` as `out-austen-char`
+
+Finally, after the model is being trained, let’s generate some text by using the `sample.py` command. Note that we need to specify the output directory `out_dir` as `out-austen-char`. Again, the below example commands uses CPU.
 
 ```sh
-python sample.py --out_dir=out-austen-char
+python sample.py --out_dir=out-austen-char --device=cpu
 ```
 We can also give a prompt word (e.g. “handsome”) like this:
 ```sh
-python sample.py --out_dir=out-austen-char --start="handsome"
+python sample.py --out_dir=out-austen-char  --device=cpu  --start="handsome"  --device=cpu 
+
+python sample.py --out_dir=out-austen-char  --device=cpu  --start="It is a truth universally acknowledged," 
+
 ```
 
 Generated text would look like this (Depending how many iterations that the training has gone through, the quality of text can vary):
@@ -65,7 +97,7 @@ AustenGPT can be repurposed thanks to NanoGPT’s versatile architecture! It can
 ```{python}
 python data/yian_char/prepare-yian.py
 ```
-This will tokenise the ~yian-char~ corpus which contains 960 characters (ie. the vocabulary size). Note this vocab size is bigger than the Austen corpus, as Chinese has many more unique characters. The corpus is split into two sets, with the training set containing  4,566 tokens and the valuation set 508 tokens.
+This will tokenise the `yian-char` corpus which contains 960 characters (ie. the vocabulary size). Note this vocab size is bigger than the Austen corpus, as Chinese has many more unique characters. The corpus is split into two sets, with the training set containing  4,566 tokens and the valuation set 508 tokens.
 
 Then train the `yihan-char` corpus:
 
@@ -78,7 +110,3 @@ Finally sample it to generate some text similar to Li Qingzhao’s poetry.
 ```{python}
 python sample.py --out_dir=out-yian-char --device=cpu
 ```
-
-
-
-
