@@ -1,20 +1,28 @@
 
-# NB: This repo is a work in progress. Code and explantary text is being added gradually. 
-
-
 # AustenGPT
  
 This project repurposes the small but versatile
-[NanoGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. It is made to accompany the fortcoming paper “AustenGPT: Organic Composition and AI Creation with Jane Austen's Novels”. 
+[NanoGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. It is made to accompany a research paper in progress on Jane Austen (1775-1817) and AI distant writing. We also use this opportunity to celebrate Austen’s 250th anniversary of her natal year in 1775. Happy birthyear, Jane! 
+
+![Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845)](assets/jane-portrait-by-cassandra-90-perc.png)
+- A high-resolution image is available from [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link")
 
 The repo hosts the code showing steps for building the two Austen corpuses, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
 
-- `/data/austen_qta/austen_qta.csv`
-- `/data/austen-char/austen-sans-quotes.txt`
+- QTA: `/data/austen_qta/austen_qta.csv`
+- AI training: `/data/austen-char/austen-sans-quotes.txt`
 
 We have tried our best to show how we achieve our results to allow fellow researcher to experiment with the corpuses, replicate and critique research findings. More details will be available from the above paper.
 
-## Exploratory QTA  
+# Building the Corpora
+We have purpose-built two corpora, one for Quantitative Text Analysis (QTA) and the other for AI training.
+
+The code for building these two corpora can be found here.
+
+1) for QTA: 
+2) for AI training: 
+
+## Exploratory QTA
 ### The Austen Word Cloud (max 250 words)
 ![austen-word-cloud](assets/austen-cloud-250-word.png)
 ### Keyness plotting of Pride and Prejudice (target) against the whole Austen corpus as reference using R
