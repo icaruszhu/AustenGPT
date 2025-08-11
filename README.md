@@ -5,22 +5,50 @@ This project repurposes the small but versatile
 [NanoGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. It is made to accompany a research paper in progress on Jane Austen (1775-1817) and AI distant writing. We also use this opportunity to celebrate Austen’s 250th anniversary of her natal year in 1775. Happy birthyear, Jane! 
 
 ![Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845)](assets/jane-portrait-by-cassandra-resize.png)
-- Source: A high-resolution image can be found from [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link")
+- Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845); Source: A high-resolution image can be found from [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link")
 
-The repo hosts the code showing steps for building the two Austen corpuses, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
+The repo hosts the code showing steps for building the two Austen corpora, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
 
 - QTA: `/data/austen_qta/austen_qta.csv`
 - AI training: `/data/austen-char/austen-sans-quotes.txt`
 
 We have tried our best to show how we achieve our results to allow fellow researcher to experiment with the corpuses, replicate and critique research findings. More details will be available from the above paper.
 
+# Installation
+- The installation of relevant software is the same as that of NanoGPT. 
+- Just clone this repo to a local computer and then follow instruction from NanoGPT for installing relevant python packages:  https://github.com/karpathy/nanoGPT/blob/master/README.md#install
+
 # Building the Corpora
-We have purpose-built two corpora, one for Quantitative Text Analysis (QTA) and the other for AI training.
+We have purpose-built two corpora, one for Quantitative Text Analysis (QTA, e.g. doing keyness analysis) and the other for AI training.
 
 The code for building these two corpora can be found here.
 
-1) for QTA: 
-2) for AI training: 
+1) for the QTA corpus, we relies on the wonderful R package `janeaustenr` as there is no need to reinvent the wheel. (https://github.com/juliasilge/janeaustenr ) 
+
+```{R}
+library (janeaustenr) # install this package if not available
+data (package = "janeaustenr")
+
+# austen_books is a function
+austen_six_novels <- austen_books()
+head (austen_six_novels)
+
+# save the corpus with 6 novels
+write.csv(x = austen_six_novels, file = "./data/austen_qta.csv", row.names = FALSE) 
+
+```
+
+2) for AI training, we need to get rid of the `book` column from the above `austen_qta.csv` dataset. Then we will also need to remove strings that separate chapters.  There can be many  different ways of achieves this. The below is just one way of doing this using two shell commands: 
+
+```{sh}
+csvcut -c 1 austen_qta.csv | grep -v CHAPTER > austen.txt
+```
+
+```{sh}
+sed 's/^"\(.*\)"$/\1/' austen.txt > austen-sans-quotes.txt
+```
+For a critical discussion for preprocessing data, see Matthew J. Denny and Arthur Spirling, “Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It” (2018) 26 Political Analysis 168
+
 
 ## Exploratory QTA
 ### The Austen Word Cloud (max 250 words)
