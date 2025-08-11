@@ -5,7 +5,7 @@ This project repurposes the small but versatile
 [NanoGPT](https://github.com/karpathy/nanoGPT) for training Jane Austen’s published works in the early 19th century. It is made to accompany a research paper in progress on Jane Austen (1775-1817) and AI distant writing. We also use this opportunity to celebrate Austen’s 250th anniversary of her natal year in 1775. Happy birthyear, Jane! 
 
 ![Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845)](assets/jane-portrait-by-cassandra-resize.png)
-- Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845); Source: A high-resolution image can be found from [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link")
+- Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845); Source: [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link"), where a high-resolution image can also be found. 
 
 The repo hosts the code showing steps for building the two Austen corpora, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
 
@@ -43,7 +43,7 @@ write.csv(x = austen_six_novels, file = "./data/austen_qta.csv", row.names = FAL
 ```{sh}
 csvcut -c 1 austen_qta.csv | grep -v CHAPTER > austen.txt
 ```
-
+To get rid of unnecessary quote marks:
 ```{sh}
 sed 's/^"\(.*\)"$/\1/' austen.txt > austen-sans-quotes.txt
 ```
