@@ -1,3 +1,5 @@
+## Citation
+Chen W. Zhu, Bingru Li and Hazel Wilkinson, “AustenGPT: Customising NanoGPT to Train on Jane Austen’s Six Published Novels (1811–1817)” [2026] Zenodo <https://doi.org/10.5281/zenodo.18761773> 
 
 # AustenGPT
  
