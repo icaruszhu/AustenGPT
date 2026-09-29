@@ -9,7 +9,7 @@ This project repurposes the small but versatile
 ![Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845)](assets/jane-portrait-by-cassandra-resize.png)
 - Jane’s portrait (c.1810) by her Sister Cassandra Austen (1773-1845); Source: [NPG](https://www.npg.org.uk/collections/search/portrait/mw00230/Jane-Austen "NPG link"), where a high-resolution image can also be found. 
 
-The repo hosts the code showing steps for building the two Austen corpora, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corpuses specifically built for this project.
+The repo hosts the code showing steps for building the two Austen corpora, one for basic exploratory quantitative text analysis and other for AI traning. Here are the two corps specifically built for this project.
 
 - QTA: `/data/austen_qta/austen_qta.csv`
 - AI training: `/data/austen-char/austen-sans-quotes.txt`
@@ -62,7 +62,7 @@ For a critical discussion for preprocessing data, see Matthew J. Denny and Arthu
 - The AI training takes three steps with three commands
 
 ## 1) Corpus Data Pre-Processing: Prepare 
-- The first step tokenises the Austen corpus and it splits the corpus into 90% for traning and 10% for validation to avoid overfitting. We can the below command with the customised `prepare-austen-char.py`. Simply run this:
+- The first step tokenises the Austen corpus and it splits the corpus into 90% for traning and 10% for validation to avoid overfitting. We can use the below command with the customised `prepare-austen-char.py`. Simply run this:
 
 ```sh
 python data/austen_char/prepare-austen-char.py        
