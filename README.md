@@ -117,7 +117,7 @@ python sample.py --out_dir=out-austen-char --device=cpu
 ```
 We can also give a prompt word (e.g. “handsome”) like this:
 ```sh
-python sample.py --out_dir=out-austen-char  --device=cpu  --start="handsome"  --device=cpu 
+python sample.py --out_dir=out-austen-char  --device=cpu  --start="Mr. Collins"  --device=cpu --temperature=0.8
 
 python sample.py --out_dir=out-austen-char  --device=cpu  --start="It is a truth universally acknowledged," 
 
